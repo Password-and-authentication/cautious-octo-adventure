@@ -5,7 +5,10 @@ module.exports = {
     entry: {
         index: './src/index.js',
         ships: "./src/ships.js",
-        board: "./src/board.js"
+        board: "./src/board.js",
+        player: "./src/Player.js",
+        UI: "./src/UI.js",
+        game: "./src/game.js"
       },
     output: {
     filename: '[name].bundle.js',

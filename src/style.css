@@ -1,0 +1,138 @@
+body, html {
+    background-color: bisque;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    
+}
+
+
+
+.board2 {
+    margin-left: 200px;
+}
+
+.board1, .board2 {
+    display: grid;
+    grid-template-columns: repeat(10, 35px);
+    grid-template-rows: repeat(10, 35px);
+}
+
+.cell {
+    border: 1px solid black
+}
+
+.busy {
+    background-color: chocolate;
+}
+
+.alphabet {
+    letter-spacing: 10.2px;
+    font-weight: bold; 
+}
+
+#alphabet-one {
+    margin-left: 10px;
+}
+
+#alphabet-two {
+    margin-left: 209px;
+}
+
+.miss {
+    background-color: darkgoldenrod;
+}
+
+.hit {
+    background-color: darkseagreen;
+}
+
+.winner {
+    position: absolute;
+    bottom: 650px;
+    
+}
+
+.new-game {
+    position: absolute;
+    background-color: burlywood;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 2px;
+    
+}
+
+.numbers {
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.left-nums {
+    position: relative;
+    right: 920px;
+    top: 185px;
+    
+}
+
+.right-nums {
+    position: relative;
+    bottom: 165px;
+    right: 372px;
+}
+
+
+.form {
+    position: absolute;
+    border: 2px solid black;
+    
+    height: 200px;
+    width: 650px;
+    top: 625px;
+    
+}
+
+h2 {
+    text-align: center;
+}
+
+h2, h3 {
+    margin: 0;
+}
+
+form {
+    display: flex;
+    gap: 70px;
+}
+
+.first, .second, .third, .fourth {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+input {
+    background-color: blanchedalmond;
+    width: 40px
+    
+}
+
+.headers {
+    display: flex;
+    gap: 40px;
+}
+
+#ready {
+    margin-left: 70%;
+    
+}

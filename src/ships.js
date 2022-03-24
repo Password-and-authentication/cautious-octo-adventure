@@ -25,6 +25,7 @@ export const makeShip = (length, id) => {
 }
 
 export function getShip(id) {
+    
     return ships.find(ship => ship.id === id)
 }
 
