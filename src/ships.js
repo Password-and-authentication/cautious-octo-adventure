@@ -12,6 +12,7 @@ export const makeShip = (length, id) => {
             return body.some(x => x === true)
         },
         isSunk: () => {
+            console.log(body.every(x => x === true))
             return body.every(x => x === true)
         },
         hit: (idx) => {

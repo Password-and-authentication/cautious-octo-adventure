@@ -45,21 +45,29 @@ export class gameBoard {
     }  
 
     receiveAttack(coordinates) {
-        console.log(coordinates)
+
+        if (this.id === 2) {
+            const celly = document.querySelector(`.two[data-id="${coordinates}"]`)
+            celly.classList.remove("celltwo")
+        }
+        
+        
         let classId;
         this.id === 1 ? classId = "one" : classId = "two"
         
         const cellDOM = document.querySelector(`.${classId}[data-id="${coordinates}"]`)
-        console.log(cellDOM)
+        
         const cell = this.board.find(cell => cell.id === coordinates)
-        console.log(cell)
+        
         if (cell.busy === false) {
             cellDOM.classList.add("miss")
             this.missed.push(coordinates)
+            console.log(`board ${this.id}, misses ${this.missed}`)
+
             return
         }
         if (this.hits.indexOf(coordinates) != -1) {
-            console.log("already hit")
+           
             return
         }
             
@@ -71,6 +79,21 @@ export class gameBoard {
             console.log("nice")
             const idx = ship.coordinates.indexOf(coordinates)
             ship.hit(idx);
+            
+
+            
+
+            if (ship.isSunk()) {
+                if (this.id === 1) {
+                    amount1 += 1;
+                    board1sunk.textContent = `Ships sunk ${amount1}`;
+
+                    
+                } else {
+                    amount2 += 1;
+                    board2sunk.textContent = `Ships sunk: ${amount2}`;
+                }
+            }
 
                     
             cellDOM.classList.add("hit")
@@ -79,6 +102,9 @@ export class gameBoard {
             } 
                 
         })
+
+        
+        console.log(`board ${this.id}, hits ${this.hits}`)
             
     }
     checkStatus() {
@@ -87,6 +113,40 @@ export class gameBoard {
     }
        
 }
+
+const display = document.createElement("div")
+display.classList.add("display")
+if (document.body !== null) document.body.appendChild(display)
+
+const firstBox = document.createElement("div")
+firstBox.classList.add("firstBox")
+export const twoBox = document.createElement("div")
+twoBox.classList.add("twoBox")
+display.appendChild(firstBox)
+display.appendChild(twoBox)
+const board1Caption = document.createElement("h3")
+board1Caption.textContent = "Board 1"
+const board2Caption = document.createElement("h3")
+board2Caption.textContent = "Board 2"
+
+firstBox.appendChild(board1Caption)
+
+export const board1sunk = document.createElement("div")
+export let amount1 = 0;
+board1sunk.textContent = `Ships sunk: ${amount1}`
+firstBox.appendChild(board1sunk)
+
+twoBox.appendChild(board2Caption)
+export const board2sunk = document.createElement("div")
+let amount2 = 0;
+export function resetAmounts() {
+    amount1 = 0;
+    amount2 = 0;
+}
+
+board2sunk.textContent = `Ships sunk: ${amount2}`
+twoBox.appendChild(board2sunk)
+
 
 
 

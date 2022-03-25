@@ -1,7 +1,7 @@
 
 
-import { gameBoard } from "./Board";
-import { Player } from "./Player";
+import { gameBoard, amount2, amount1, board1sunk, board2sunk, resetAmounts } from "./Board";
+import { Player, aiRandom, resetArr } from "./Player";
 import {makeShip} from "./ships";
 
 
@@ -10,6 +10,8 @@ export let board1;
 export let board2;
 export let player1;
 export let player2;
+
+
 
 
 
@@ -49,63 +51,40 @@ export function game(userName, isFirst) {
     makeShip(3, 19)
     makeShip(4, 20)
     
-    board2.shipTo(["B6"], 11)
-    board2.shipTo(["I10"], 12)
-    board2.shipTo(["H2"], 13)
-    board2.shipTo(["C4"], 14)
-    board2.shipTo(["A10", "B10"], 15)
-    board2.shipTo(["F1", "F2"], 16)
-    board2.shipTo(["I6", "J6"], 17)
-    board2.shipTo(["D9", "E9", "F9"], 18)
-    board2.shipTo(["E5", "E6", "E7"], 19)
-    board2.shipTo(["A1", "A2", "A3", "A4"], 20)
-
     enemyBoard();
 
     if (isFirst) {
         initalShipPlacement();
-    } else {
-
     }
-
     
-
-
-    function winner() {
-        const winner = document.querySelector(".winner")
-        winner.textContent = `${player1.name} is the winner!`
-    }
-
     return {
         player1,
         player2,
         board1,
         board2,
         end() {
-            winner();
-
-            console.log(board1)
+        
             board1 = null;
             board2 = null;
             player1 = null;
             player2 = null;
 
-            
-
             const cells = document.querySelectorAll(".cell")
             cells.forEach(cell => {
                 
-                setTimeout(() => {
+                
                     cell.classList.remove("busy")
                     cell.classList.remove("hit")
                     cell.classList.remove("miss")
 
-                   
+                    resetAmounts();
+                    resetArr();
                     
-                }, 2000);
-            })
-
-            
+                    board1sunk.textContent = "Ships sunk: "
+                    board2sunk.textContent = "Ships sunk: "
+                    
+                }
+            )   
             
         }
         
@@ -138,22 +117,64 @@ function initalShipPlacement() {
     board1.shipTo(["D3", "E3", "F3"], 8)
     board1.shipTo(["E5", "E6", "E7"], 9)
     board1.shipTo(["F10", "G10", "H10", "I10"], 10)
-    
-    
 }
+/*
 
-function enemyBoard(random) {
-    board2.shipTo(["B6"], 11)
-    board2.shipTo(["I10"], 12)
-    board2.shipTo(["H2"], 13)
-    board2.shipTo(["C4"], 14)
-    board2.shipTo(["A10", "B10"], 15)
+UNUSED CODE :(
+
+const array = [];
+let random;
+let number;
+let letter;
+let letters;
+let nextLetter;
+let next;
+
+function aiBoard() {
+    letters = "ABCDEFGHIJ";
+    let letter = letters[Math.floor(Math.random() * 10)]
+    let number = Math.floor(Math.random() * 10) + 1;
+
+    random = letter + number;
+    let left = letters[letters.indexOf(random[0]) - 1];
+    left += number;
+    let right = letters[letters.indexOf(random[0]) + 1];
+    right += number;
+    let bot = number + 1;
+    let top = number - 1;
+    
+    if (
+        array.some(x => x === random) || array.some(x => x === left)
+       || array.some(x => x === right)|| array.some(x => x === bot)
+       || array.some(x => x === top)) aiBoard();
+    array.push(random)
+    array.push(left)
+    array.push(right)
+    array.push(bot)
+
+    return {
+        random,
+        letter,
+        number
+    }
+}
+*/
+
+function enemyBoard() {
+    
+    board2.shipTo(["H10"], 11)
+    board2.shipTo(["C1"], 12)
+    board2.shipTo(["A8"], 13)
+    board2.shipTo(["J9"], 14)
+    board2.shipTo(["I1", "J1"], 15)
     board2.shipTo(["F1", "F2"], 16)
     board2.shipTo(["I6", "J6"], 17)
     board2.shipTo(["D9", "E9", "F9"], 18)
     board2.shipTo(["E5", "E6", "E7"], 19)
     board2.shipTo(["A1", "A2", "A3", "A4"], 20)
 }
+
+
 
 
 

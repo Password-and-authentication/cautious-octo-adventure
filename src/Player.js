@@ -1,4 +1,5 @@
 import { board2, board1, player2, player1, game } from "./game"
+import { amount2, amount1 } from "./Board"
 
 
 export class Player {
@@ -19,8 +20,17 @@ export class Player {
                 board2.receiveAttack(coordinates)
 
                 if (board2.checkStatus()) {
-                    game(player1.name).end();
-                    return
+                    
+                    setTimeout(() => {
+                        game(this.name).end();
+                    }, 2000);
+                    
+                    const winner = document.querySelector(".winner")
+                    console.log(player1)
+                    winner.textContent = `${this.name} is the winner!`
+                    winner.style.display = "block";
+
+                    return;
                 }
                 turn = 2;
                 player2.attack();
@@ -28,7 +38,13 @@ export class Player {
                 board1.receiveAttack(aiRandom())
 
                 if (board1.checkStatus()) {
-                    game(player2.name).end();
+                    setTimeout(() => {
+                        game(this.name).end();
+                    }, 2000)
+                    
+                    const winner = document.querySelector(".winner")
+                    winner.textContent = `${this.name} is the winner!`
+                    winner.style.display = "block"
                     return
                 }
                 turn = 1;
@@ -38,9 +54,12 @@ export class Player {
 }
 
 let turn = 1;
-export let random;
-const arr = [];
+let random;
+let arr = [];
 
+export function resetArr() {
+    arr = []
+}
 
 export function aiRandom() {
     const letters = "ABCDEFGHIJ";
@@ -52,8 +71,6 @@ export function aiRandom() {
     
     if (arr.some(val => val === random)) return aiRandom();
     arr.push(random)
-
-
     
     return random
 }

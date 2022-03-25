@@ -1,4 +1,5 @@
 import { board1, board2, game, player1, newGame } from "./game"
+import { resetArr } from "./Player"
 import { getShip, makeShip } from "./ships"
 
 
@@ -6,10 +7,11 @@ export const boardOne = document.querySelector(".board1")
 export const boardTwo = document.querySelector(".board2")
 game("pharrell", true)
 
+console.log(board2)
+
 
 boardContent(board1, boardOne, "one")
 boardContent(board2, boardTwo, "two")
-
 
 
 export function boardContent(board, boardEl, id) {
@@ -27,12 +29,14 @@ export function boardContent(board, boardEl, id) {
     
         if (board.board[i].busy) {
             cell.classList.add("busy")
+            id === "two" ? cell.classList.add("celltwo") : false
         }
 
         if (id === "two") {
             cell.addEventListener("click", () => {
                 
                 player1.attack(cell.dataset.id)
+                
             })
         }
     }
@@ -60,27 +64,30 @@ displayNumbers("left-nums")
 displayNumbers("right-nums")
 
 newGame.addEventListener("click", () => {
-    const name = "shakira"
-
+    
+    form.style.display = "block"
     game().end();
 
-    
-    
-
+    document.querySelector(".winner").style.display = "none";
 
     /*boardContent(board1, boardOne, "one")
     boardContent(board2, boardTwo, "two")
 */
     
-})
+});
 
-const ready = document.querySelector("#ready")
+const form = document.querySelector(".form")
+
+const ready = document.querySelector("#ready");
 if (ready !== null) {
     ready.addEventListener("click", () => {
-        game("test")
+        game(document.querySelector("#name").value)
+        
 
         
-        
+        form.style.display = "none"
+
+    
         const cells = document.querySelectorAll(".one")
         cells.forEach(cell => {
             cell.remove();
@@ -106,8 +113,7 @@ if (ready !== null) {
         large = large.replace(/\s/g, '')
         const arr6 = large.split(",")
 
-        
-
+    
         board1.shipTo([document.querySelector("#small1").value], 1)
         board1.shipTo([document.querySelector("#small2").value], 2)
         board1.shipTo([document.querySelector("#small3").value], 3)
